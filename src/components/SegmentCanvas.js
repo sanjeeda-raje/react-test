@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { BsChevronLeft } from "react-icons/bs";
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
+
 
 const SegmentCanvas = () => {
     const [segmentName ,setSegmentName] = useState("");
@@ -68,10 +71,16 @@ const SegmentCanvas = () => {
         });
     
         if (response.ok) {
+          toastr.success('Segment data sent successfully', '', {
+            positionClass: 'toast-bottom-left',
+            showProgressBar: true,
+            progressBar: true,
+          });
           console.log('Segment data sent successfully');
         } else {
+          toastr.error('Failed to send segment data');
           console.error('Failed to send segment data');
-        }
+        }
       } catch (error) {
         console.error('Error:', error.message);
       }
